@@ -1,8 +1,24 @@
-<h1>Movie Lists</h1>
-<% @lists.each do |list| %>
-  <%= link_to list_path(list) do %>
- <p> <%= list.name %> </p>
- <% end %>
-<% end %>
-
-<%= link_to "create a movie list", new_list_path %>
+<div class="cover mb-4 d-flex align-items-center justify-content-center">
+  <div class="text-center text-white">
+    <h1>Your favourite films, all in one place</h1>
+    <%# <h3 class="typed-js" data-controller="typed-js"></h3> %>
+    <h4 class="typed-js"><span data-controller="typed-js"></span></h4>
+  </div>
+</div>
+<div class="container py-5">
+  <div class="d-flex align-items-center justify-content-between mb-3">
+    <h3 class="mb-0">My Lists</h3>
+    <%= link_to "Create a movie list", new_list_path, class: "btn btn-flat" %>
+  </div>
+  <div class="row">
+    <% @lists.each do |list| %>
+      <div class="co-12 col-sm-6 col-md-4 mb-3">
+        <%= link_to list_path(list), class:"text-decoration-none" do %>
+          <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path list.photo.key, height: 300, width: 400, crop: :fill %>')">
+            <%= list.name %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
