@@ -28,4 +28,5 @@
 </div>
 
 <%= link_to "add a movie", new_list_bookmark_path(@list) %>
-<%= link_to "delete this list", list_path(@list), class: "btn btn-cancel", data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this list?" } %>
+<%# <small class="text-right flex-shrink-0"><%= link_to "delete", bookmark_path(bookmarks), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to remove #{movie.title} from your #{@list.name} list"}, class: 'text-danger' %></small>
+      <%= link_to "delete", list_path(@list) , class: "btn btn-cancel", data: { turbo_method: :destroy, turbo_confirm: "Are you sure you want to delete this list?" } %>

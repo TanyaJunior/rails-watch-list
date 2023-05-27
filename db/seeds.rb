@@ -17,6 +17,10 @@ url = "https://tmdb.lewagon.com/movie/top_rated"
 data_raw = URI.open(url).read
 data = JSON.parse(data_raw)
 
+url = ""
+data_raw = URI.open(url).read
+data = JSON.parse(data_raw)
+
 infos = data["results"]
 
 infos.each do |info|
@@ -28,4 +32,14 @@ infos.each do |info|
                     rating: info["vote_average"])
   movie.photo.attach(io: file, filename: "#{info["original_title"].gsub(" ", "-")}.png", content_type: "image/png")
   movie.save
+
+  infos.each do |info|
+    poster_url = "/#{info["poster_path"]}"
+    file = URI.open(poster_url)
+    movie = Movie.new(title: info["original_title"],
+                      overview: info["overview"],
+                      poster_url: poster_url,
+                      rating: info["vote_average"])
+    movie.photo.attach(io: file, filename: "#{info["original_title"].gsub(" ", "-")}.png", content_type: "image/png")
+    movie.save
 end
